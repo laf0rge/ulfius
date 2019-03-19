@@ -19,7 +19,9 @@ cmake_minimum_required(VERSION 3.5)
 project(ulfius C)
 
 set(CMAKE_C_STANDARD 99)
-set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wall -Werror")
+if (NOT MSVC)
+    set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wall -Werror")
+endif()
 
 # library info
 
@@ -182,11 +184,13 @@ endif ()
 # shared library
 
 add_library(ulfius SHARED ${LIB_SRC})
-set_target_properties(ulfius PROPERTIES
-    COMPILE_OPTIONS -Wextra
-    PUBLIC_HEADER "${INC_DIR}/ulfius.h;${PROJECT_BINARY_DIR}/ulfius-cfg.h"
-    VERSION "${LIBRARY_VERSION}"
-    SOVERSION "${LIBRARY_SOVERSION}")
+if (NOT MSVC)
+    set_target_properties(ulfius PROPERTIES
+        COMPILE_OPTIONS -Wextra
+        PUBLIC_HEADER "${INC_DIR}/ulfius.h;${PROJECT_BINARY_DIR}/ulfius-cfg.h"
+        VERSION "${LIBRARY_VERSION}"
+        SOVERSION "${LIBRARY_SOVERSION}")
+endif()
 if (WIN32)
     set_target_properties(ulfius PROPERTIES SUFFIX "-${LIBRARY_VERSION_MAJOR}.dll")
 endif ()
