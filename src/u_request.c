@@ -279,6 +279,7 @@ int ulfius_init_request(struct _u_request * request) {
     request->check_server_certificate_flag = U_SSL_VERIFY_PEER|U_SSL_VERIFY_HOSTNAME;
     request->check_proxy_certificate = 1;
     request->check_proxy_certificate_flag = U_SSL_VERIFY_PEER|U_SSL_VERIFY_HOSTNAME;
+    request->ca_path = NULL;
     request->client_address = NULL;
     request->binary_body = NULL;
     request->binary_body_length = 0;
@@ -311,6 +312,7 @@ int ulfius_clean_request(struct _u_request * request) {
     o_free(request->auth_basic_user);
     o_free(request->auth_basic_password);
     o_free(request->client_address);
+    o_free(request->ca_path);
     u_map_clean_full(request->map_url);
     u_map_clean_full(request->map_header);
     u_map_clean_full(request->map_cookie);
