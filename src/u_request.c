@@ -371,6 +371,7 @@ int ulfius_copy_request(struct _u_request * dest, const struct _u_request * sour
     dest->check_server_certificate_flag = source->check_server_certificate_flag;
     dest->check_proxy_certificate = source->check_proxy_certificate;
     dest->check_proxy_certificate_flag = source->check_proxy_certificate_flag;
+    dest->ca_path = o_strdup(source->ca_path);
     dest->timeout = source->timeout;
     dest->auth_basic_user = o_strdup(source->auth_basic_user);
     dest->auth_basic_password = o_strdup(source->auth_basic_password);
@@ -495,6 +496,7 @@ struct _u_request * ulfius_duplicate_request(const struct _u_request * request) 
       new_request->check_server_certificate_flag = request->check_server_certificate_flag;
       new_request->check_proxy_certificate = request->check_proxy_certificate;
       new_request->check_proxy_certificate_flag = request->check_proxy_certificate_flag;
+      new_request->ca_path = o_strdup(request->ca_path);
       new_request->timeout = request->timeout;
       new_request->auth_basic_user = o_strdup(request->auth_basic_user);
       new_request->auth_basic_password = o_strdup(request->auth_basic_password);
